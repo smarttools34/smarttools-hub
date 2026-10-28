@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartTools Hub - Free Online Tools</title>
+<meta name="description" content="Use free online tools for text, images and calculations.">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+header{background:#155eef;color:white;padding:28px 16px;text-align:center}
+header h1{margin:0 0 10px;font-size:30px}
+header p{margin:0}
+main{max-width:900px;margin:24px auto;padding:0 15px}
+input{width:100%;padding:14px;border:1px solid #ccd3df;border-radius:10px;font-size:16px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.card{background:white;padding:20px;border-radius:12px;box-shadow:0 2px 9px #0000000d}
+.card h2{font-size:19px;margin-top:0}
+textarea{width:100%;height:100px;padding:10px;border:1px solid #ccd3df;border-radius:8px}
+button{background:#155eef;color:white;border:0;border-radius:8px;padding:11px 14px;margin-top:10px;cursor:pointer}
+.result{overflow-wrap:anywhere;font-size:14px}
+footer{text-align:center;padding:25px;color:#64748b}
+</style>
+</head>
+<body>
+<header>
+<h1>SmartTools Hub</h1>
+<p>Free Online Tools for Everyone</p>
+</header>
+<main>
+<input id="search" placeholder="Search a tool..." oninput="filterTools()">
+<div class="grid" id="tools">
+
+<section class="card">
+<h2>Word Counter</h2>
+<textarea id="words" placeholder="Write or paste your text"></textarea>
+<button onclick="countWords()">Count Words</button>
+<p class="result" id="wordResult">Words: 0 | Characters: 0</p>
+</section>
+
+<section class="card">
+<h2>Case Converter</h2>
+<textarea id="caseText" placeholder="Enter your text"></textarea>
+<button onclick="convertCase('upper')">UPPERCASE</button>
+<button onclick="convertCase('lower')">lowercase</button>
+<p class="result" id="caseResult"></p>
+</section>
+
+<section class="card">
+<h2>Percentage Calculator</h2>
+<input id="part" type="number" placeholder="Enter percentage">
+<input id="total" type="number" placeholder="Enter total number">
+<button onclick="calculate()">Calculate</button>
+<p class="result" id="calcResult"></p>
+</section>
+
+<section class="card">
+<h2>Image Resizer</h2>
+<input type="file" id="imageFile" accept="image/*">
+<input type="number" id="imgWidth" placeholder="New width in pixels">
+<button onclick="resizeImage()">Resize Image</button>
+<p class="result" id="imageResult"></p>
+</section>
+
+</div>
+</main>
+<footer>© 2026 SmartTools Hub</footer>
+<script>
+function countWords(){
+let t=document.getElementById('words').value.trim();
+let w=t?t.split(/\s+/).length:0;
+document.getElementById('wordResult').textContent='Words: '+w+' | Characters: '+document.getElementById('words').value.length;
+}
+function convertCase(type){
+let e=document.getElementById('caseText');
+e.value=type==='upper'?e.value.toUpperCase():e.value.toLowerCase();
+}
+function calculate(){
+let p=Number(document.getElementById('part').value);
+let t=Number(document.getElementById('total').value);
+document.getElementById('calcResult').textContent='Result: '+(p*t/100);
+}
+function filterTools(){
+let q=document.getElementById('search').value.toLowerCase();
+document.querySelectorAll('.card').forEach(c=>{
+c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none';
+});
+}
+function resizeImage(){
+let file=document.getElementById('imageFile').files[0];
+let width=Number(document.getElementById('imgWidth').value);
+let out=document.getElementById('imageResult');
+if(!file||width<1){out.textContent='Please select an image and enter a valid width.';return;}
+let img=new Image(),url=URL.createObjectURL(file);
+img.onload=function(){
+let canvas=document.createElement('canvas');
+canvas.width=width;canvas.height=Math.round(img.height*width/img.width);
+canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+canvas.toBlob(function(blob){
+let a=document.createElement('a');
+a.href=URL.createObjectURL(blob);a.download='resized-image.png';a.textContent='Download Resized Image';
+out.replaceChildren(a);URL.revokeObjectURL(url);
+},'image/png');
+};
+img.src=url;
+}
+</script>
+</body>
+</html>
