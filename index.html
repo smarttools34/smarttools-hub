@@ -2,108 +2,397 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="SmartTools Hub offers free online text tools, calculators and image tools. Fast, simple and easy to use.">
+<meta name="theme-color" content="#101828">
 <title>SmartTools Hub - Free Online Tools</title>
-<meta name="description" content="Use free online tools for text, images and calculations.">
+
 <style>
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#687386;
+  --blue:#4568f5;
+  --border:#e5e9f2;
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
-header{background:#155eef;color:white;padding:28px 16px;text-align:center}
-header h1{margin:0 0 10px;font-size:30px}
-header p{margin:0}
-main{max-width:900px;margin:24px auto;padding:0 15px}
-input{width:100%;padding:14px;border:1px solid #ccd3df;border-radius:10px;font-size:16px;margin-bottom:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-.card{background:white;padding:20px;border-radius:12px;box-shadow:0 2px 9px #0000000d}
-.card h2{font-size:19px;margin-top:0}
-textarea{width:100%;height:100px;padding:10px;border:1px solid #ccd3df;border-radius:8px}
-button{background:#155eef;color:white;border:0;border-radius:8px;padding:11px 14px;margin-top:10px;cursor:pointer}
-.result{overflow-wrap:anywhere;font-size:14px}
-footer{text-align:center;padding:25px;color:#64748b}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+header{
+  background:#101828;
+  color:white;
+  padding:18px 16px;
+}
+.nav{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.logo{font-size:21px;font-weight:bold}
+.logo span{color:#8da2ff}
+.nav small{color:#c5cde0}
+.hero{
+  background:linear-gradient(135deg,#101828,#263f86);
+  color:white;
+  text-align:center;
+  padding:54px 18px 60px;
+}
+.hero h1{
+  font-size:clamp(30px,6vw,48px);
+  line-height:1.2;
+  margin:0 0 15px;
+}
+.hero p{
+  color:#d7def4;
+  max-width:600px;
+  margin:0 auto 25px;
+}
+.search{
+  display:block;
+  width:100%;
+  max-width:590px;
+  margin:auto;
+  padding:16px 18px;
+  border:2px solid transparent;
+  border-radius:12px;
+  font-size:16px;
+  outline:none;
+}
+.search:focus{border-color:#8da2ff}
+main{
+  max-width:1100px;
+  margin:35px auto;
+  padding:0 16px;
+}
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
+}
+.section-title h2{font-size:24px;margin:0}
+.section-title p{color:var(--muted);margin:3px 0}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
+  gap:18px;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  box-shadow:0 5px 20px #182b4a08;
+  min-width:0;
+}
+.card:hover{
+  border-color:#b9c7ff;
+  box-shadow:0 8px 25px #182b4a10;
+}
+.icon{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  background:#edf0ff;
+  border-radius:12px;
+  font-size:23px;
+  margin-bottom:12px;
+}
+.card h3{margin:0 0 5px;font-size:19px}
+.desc{color:var(--muted);font-size:14px;margin:0 0 16px}
+label{display:block;font-size:14px;font-weight:bold;margin:12px 0 5px}
+textarea,input,select{
+  width:100%;
+  padding:12px;
+  border:1px solid #d8deea;
+  border-radius:9px;
+  background:white;
+  color:#172033;
+  font-size:15px;
+  font-family:inherit;
+}
+textarea{min-height:95px;resize:vertical}
+button,.download{
+  display:inline-block;
+  border:0;
+  border-radius:9px;
+  padding:11px 15px;
+  background:var(--blue);
+  color:white;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+  text-decoration:none;
+  margin-top:10px;
+}
+button:hover,.download:hover{background:#304fe0}
+.secondary{background:#e9edff;color:#304fe0}
+.secondary:hover{background:#dce3ff}
+.result{
+  background:#f5f7ff;
+  border-radius:9px;
+  padding:11px;
+  margin-top:12px;
+  overflow-wrap:anywhere;
+  font-size:14px;
+}
+.hidden{display:none!important}
+footer{
+  background:#101828;
+  color:#cbd3e4;
+  text-align:center;
+  padding:30px 16px;
+  margin-top:50px;
+}
+footer a{color:#cbd3e4;text-decoration:none;margin:0 7px}
+footer a:hover{text-decoration:underline}
+.note{font-size:12px;color:var(--muted);margin-top:10px}
+@media(max-width:480px){
+ .hero{padding:40px 15px}
+ .card{padding:18px}
+ .section-title h2{font-size:21px}
+}
 </style>
 </head>
+
 <body>
+
 <header>
-<h1>SmartTools Hub</h1>
-<p>Free Online Tools for Everyone</p>
+  <div class="nav">
+    <div class="logo">SmartTools <span>Hub.</span></div>
+    <small>Simple · Fast · Free</small>
+  </div>
 </header>
+
+<section class="hero">
+  <h1>Everyday Tools,<br>Simplified.</h1>
+  <p>Useful online tools to help you work smarter. No complicated setup, just open and use.</p>
+  <input class="search" id="search" type="search"
+    placeholder="🔎  Search tools..." aria-label="Search tools"
+    oninput="filterTools()">
+</section>
+
 <main>
-<input id="search" placeholder="Search a tool..." oninput="filterTools()">
-<div class="grid" id="tools">
+  <div class="section-title">
+    <div>
+      <h2>Explore Our Tools</h2>
+      <p>Free tools for your everyday tasks.</p>
+    </div>
+  </div>
 
-<section class="card">
-<h2>Word Counter</h2>
-<textarea id="words" placeholder="Write or paste your text"></textarea>
-<button onclick="countWords()">Count Words</button>
-<p class="result" id="wordResult">Words: 0 | Characters: 0</p>
-</section>
+  <div class="grid" id="toolGrid">
 
-<section class="card">
-<h2>Case Converter</h2>
-<textarea id="caseText" placeholder="Enter your text"></textarea>
-<button onclick="convertCase('upper')">UPPERCASE</button>
-<button onclick="convertCase('lower')">lowercase</button>
-<p class="result" id="caseResult"></p>
-</section>
+    <section class="card" data-name="word counter text words characters">
+      <div class="icon">📝</div>
+      <h3>Word Counter</h3>
+      <p class="desc">Count words, characters and spaces in your text.</p>
+      <textarea id="wordText" placeholder="Type or paste your text here..." oninput="countWords()"></textarea>
+      <div class="result" id="wordResult">Words: 0 · Characters: 0</div>
+    </section>
 
-<section class="card">
-<h2>Percentage Calculator</h2>
-<input id="part" type="number" placeholder="Enter percentage">
-<input id="total" type="number" placeholder="Enter total number">
-<button onclick="calculate()">Calculate</button>
-<p class="result" id="calcResult"></p>
-</section>
+    <section class="card" data-name="case converter uppercase lowercase text">
+      <div class="icon">🔠</div>
+      <h3>Case Converter</h3>
+      <p class="desc">Convert text to uppercase or lowercase.</p>
+      <textarea id="caseText" placeholder="Enter text to convert..."></textarea>
+      <button onclick="changeCase('upper')">UPPERCASE</button>
+      <button class="secondary" onclick="changeCase('lower')">lowercase</button>
+      <button class="secondary" onclick="changeCase('title')">Title Case</button>
+    </section>
 
-<section class="card">
-<h2>Image Resizer</h2>
-<input type="file" id="imageFile" accept="image/*">
-<input type="number" id="imgWidth" placeholder="New width in pixels">
-<button onclick="resizeImage()">Resize Image</button>
-<p class="result" id="imageResult"></p>
-</section>
+    <section class="card" data-name="percentage calculator math calculation">
+      <div class="icon">🔢</div>
+      <h3>Percentage Calculator</h3>
+      <p class="desc">Calculate a percentage of any number.</p>
+      <label for="percent">Percentage (%)</label>
+      <input id="percent" type="number" placeholder="e.g. 20">
+      <label for="total">Number</label>
+      <input id="total" type="number" placeholder="e.g. 500">
+      <button onclick="calcPercent()">Calculate</button>
+      <div class="result" id="percentResult" aria-live="polite">Your result will appear here.</div>
+    </section>
 
-</div>
+    <section class="card" data-name="age calculator birthday date years">
+      <div class="icon">🎂</div>
+      <h3>Age Calculator</h3>
+      <p class="desc">Calculate your age from your date of birth.</p>
+      <label for="birth">Date of Birth</label>
+      <input id="birth" type="date">
+      <button onclick="calcAge()">Calculate Age</button>
+      <div class="result" id="ageResult" aria-live="polite">Your age will appear here.</div>
+    </section>
+
+    <section class="card" data-name="image resizer resize photo picture">
+      <div class="icon">🖼️</div>
+      <h3>Image Resizer</h3>
+      <p class="desc">Resize an image to your required width.</p>
+      <label for="imageFile">Choose Image</label>
+      <input id="imageFile" type="file" accept="image/*">
+      <label for="imageWidth">New Width (pixels)</label>
+      <input id="imageWidth" type="number" min="1" max="10000" placeholder="e.g. 800">
+      <button onclick="resizeImage()">Resize Image</button>
+      <div class="result" id="imageResult" aria-live="polite">Your resized image will appear here.</div>
+    </section>
+
+    <section class="card" data-name="text cleaner remove extra spaces">
+      <div class="icon">✨</div>
+      <h3>Text Cleaner</h3>
+      <p class="desc">Remove extra spaces from your text.</p>
+      <textarea id="cleanText" placeholder="Paste text with extra spaces..."></textarea>
+      <button onclick="cleanSpaces()">Clean Text</button>
+      <div class="result" id="cleanResult">Your cleaned text will appear here.</div>
+      <button class="secondary" onclick="copyClean()">Copy Result</button>
+    </section>
+
+  </div>
+
+  <p id="noResults" class="result hidden">No tools found. Try another search.</p>
+
+  <section style="margin-top:38px" class="card">
+    <h2>About SmartTools Hub</h2>
+    <p class="desc">SmartTools Hub is a growing collection of simple online utilities designed to make everyday digital tasks easier. More useful tools will be added over time.</p>
+  </section>
 </main>
-<footer>© 2026 SmartTools Hub</footer>
+
+<footer>
+  <div><strong>SmartTools Hub</strong> — Free Online Tools</div>
+  <p>Simple tools to make everyday work easier.</p>
+  <div>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p>© <span id="year"></span> SmartTools Hub</p>
+</footer>
+
 <script>
 function countWords(){
-let t=document.getElementById('words').value.trim();
-let w=t?t.split(/\s+/).length:0;
-document.getElementById('wordResult').textContent='Words: '+w+' | Characters: '+document.getElementById('words').value.length;
+  const text=document.getElementById('wordText').value;
+  const trimmed=text.trim();
+  const words=trimmed?trimmed.split(/\s+/u).length:0;
+  document.getElementById('wordResult').textContent=
+    'Words: '+words+' · Characters: '+text.length+' · No spaces: '+text.replace(/\s/g,'').length;
 }
-function convertCase(type){
-let e=document.getElementById('caseText');
-e.value=type==='upper'?e.value.toUpperCase():e.value.toLowerCase();
+
+function changeCase(type){
+  const el=document.getElementById('caseText');
+  if(type==='upper') el.value=el.value.toUpperCase();
+  if(type==='lower') el.value=el.value.toLowerCase();
+  if(type==='title'){
+    el.value=el.value.toLowerCase().replace(/\b\p{L}/gu,c=>c.toUpperCase());
+  }
 }
-function calculate(){
-let p=Number(document.getElementById('part').value);
-let t=Number(document.getElementById('total').value);
-document.getElementById('calcResult').textContent='Result: '+(p*t/100);
+
+function calcPercent(){
+  const p=document.getElementById('percent').value;
+  const n=document.getElementById('total').value;
+  const out=document.getElementById('percentResult');
+  if(p===''||n===''||!Number.isFinite(Number(p)*Number(n))){
+    out.textContent='Please enter valid numbers.';
+    return;
+  }
+  out.textContent=p+'% of '+n+' = '+(Number(p)*Number(n)/100);
 }
+
+function calcAge(){
+  const val=document.getElementById('birth').value;
+  const out=document.getElementById('ageResult');
+  if(!val){out.textContent='Please select your date of birth.';return;}
+  const birth=new Date(val+'T00:00:00');
+  const now=new Date();
+  if(Number.isNaN(birth.getTime())||birth>now){
+    out.textContent='Please enter a valid date in the past.';
+    return;
+  }
+  let years=now.getFullYear()-birth.getFullYear();
+  let months=now.getMonth()-birth.getMonth();
+  let days=now.getDate()-birth.getDate();
+  if(days<0){
+    months--;
+    days=new Date(now.getFullYear(),now.getMonth(),0).getDate()+days;
+  }
+  if(months<0){years--;months+=12;}
+  out.textContent='Your age is '+years+' years, '+months+' months and '+days+' days.';
+}
+
+function cleanSpaces(){
+  const t=document.getElementById('cleanText').value;
+  document.getElementById('cleanResult').textContent=t.trim().replace(/\s+/g,' ');
+}
+function copyClean(){
+  const t=document.getElementById('cleanResult').textContent;
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(t).then(()=>alert('Copied!')).catch(()=>alert('Please select and copy the result manually.'));
+  }else{
+    alert('Please select and copy the result manually.');
+  }
+}
+
 function filterTools(){
-let q=document.getElementById('search').value.toLowerCase();
-document.querySelectorAll('.card').forEach(c=>{
-c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none';
-});
+  const q=document.getElementById('search').value.toLowerCase().trim();
+  let shown=0;
+  document.querySelectorAll('#toolGrid .card').forEach(card=>{
+    const match=(card.dataset.name+' '+card.innerText).toLowerCase().includes(q);
+    card.classList.toggle('hidden',!match);
+    if(match) shown++;
+  });
+  document.getElementById('noResults').classList.toggle('hidden',shown!==0);
 }
+
+let currentImageUrl=null;
 function resizeImage(){
-let file=document.getElementById('imageFile').files[0];
-let width=Number(document.getElementById('imgWidth').value);
-let out=document.getElementById('imageResult');
-if(!file||width<1){out.textContent='Please select an image and enter a valid width.';return;}
-let img=new Image(),url=URL.createObjectURL(file);
-img.onload=function(){
-let canvas=document.createElement('canvas');
-canvas.width=width;canvas.height=Math.round(img.height*width/img.width);
-canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
-canvas.toBlob(function(blob){
-let a=document.createElement('a');
-a.href=URL.createObjectURL(blob);a.download='resized-image.png';a.textContent='Download Resized Image';
-out.replaceChildren(a);URL.revokeObjectURL(url);
-},'image/png');
-};
-img.src=url;
+  const file=document.getElementById('imageFile').files[0];
+  const width=Number(document.getElementById('imageWidth').value);
+  const out=document.getElementById('imageResult');
+  if(!file||!file.type.startsWith('image/')){
+    out.textContent='Please choose a valid image.';
+    return;
+  }
+  if(!Number.isInteger(width)||width<1||width>10000){
+    out.textContent='Please enter a width between 1 and 10000 pixels.';
+    return;
+  }
+  const url=URL.createObjectURL(file);
+  const img=new Image();
+  out.textContent='Processing image...';
+  img.onload=function(){
+    const height=Math.max(1,Math.round(img.height*width/img.width));
+    const canvas=document.createElement('canvas');
+    canvas.width=width;canvas.height=height;
+    const ctx=canvas.getContext('2d');
+    ctx.drawImage(img,0,0,width,height);
+    canvas.toBlob(function(blob){
+      URL.revokeObjectURL(url);
+      if(!blob){out.textContent='Could not process this image.';return;}
+      if(currentImageUrl) URL.revokeObjectURL(currentImageUrl);
+      currentImageUrl=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=currentImageUrl;
+      a.download='smarttools-resized.png';
+      a.className='download';
+      a.textContent='Download Resized Image';
+      out.replaceChildren(a);
+    },'image/png');
+  };
+  img.onerror=function(){
+    URL.revokeObjectURL(url);
+    out.textContent='Could not open this image.';
+  };
+  img.src=url;
 }
+
+document.getElementById('year').textContent=new Date().getFullYear();
 </script>
 </body>
 </html>
